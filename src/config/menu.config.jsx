@@ -668,7 +668,7 @@ export const MENU_MEGA = [
               {
                 title: 'Events',
                 // icon: Building,
-                path: '/public-profile/profiles/gamer',
+                path: '/events',
               },
               {
                 title: 'More',

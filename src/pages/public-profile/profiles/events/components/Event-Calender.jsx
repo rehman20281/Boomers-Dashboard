@@ -1,29 +1,15 @@
-import React from 'react'
-import { Calendar } from '@/components/ui/calendar';
 
-const EventCalender = () => {
+import React, { useState } from "react";
+import { Calendar } from 'primereact/calendar';
 
-    const [tempDateRange, setTempDateRange] = useState(date);
-    const handleDateRangeApply = () => {
-        setDate(tempDateRange); // Save the temporary date range to the main state
-        setIsOpen(false); // Close the popover
-    };
-    const handleDateRangeReset = () => {
-        setTempDateRange(undefined); // Reset the temporary date range
-    };
+const CalendarComponent = () => {
+    const [date, setDate] = useState(null);
 
     return (
-        <>
-            <Calendar
-                initialFocus
-                mode="range"
-                defaultMonth={tempDateRange?.from || defaultStartDate}
-                selected={tempDateRange}
-                onSelect={setTempDateRange}
-                numberOfMonths={1}
-            />
-        </>
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        </div>
     )
 }
-
-export default EventCalender
+        
+export default CalendarComponent;
