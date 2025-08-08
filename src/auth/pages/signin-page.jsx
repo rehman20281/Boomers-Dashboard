@@ -58,13 +58,13 @@ export function SignInPage() {
         case 'auth_callback_error':
           setError(
             errorDescription ||
-              'An error occurred during authentication. Please try again.',
+            'An error occurred during authentication. Please try again.',
           );
           break;
         case 'auth_token_error':
           setError(
             errorDescription ||
-              'Failed to set authentication session. Please try again.',
+            'Failed to set authentication session. Please try again.',
           );
           break;
         default:
@@ -79,75 +79,83 @@ export function SignInPage() {
   const form = useForm({
     resolver: zodResolver(getSigninSchema()),
     defaultValues: {
-      email: 'demo@kt.com',
-      password: 'demo123',
+      email: 'abc@gmail.com',
+      password: '12345678',
       rememberMe: true,
     },
   });
 
   async function onSubmit(values) {
+    // try {
+    //   setIsProcessing(true);
+    //   setError(null);
+
+    //   console.log('Attempting to sign in with email:', values.email);
+
+    //   // Simple validation
+    //   if (!values.email.trim() || !values.password) {
+    //     setError('Email and password are required');
+    //     return;
+    //   }
+
+    //   // Sign in using the auth context
+    //   await login(values.email, values.password);
+
+    //   // Get the 'next' parameter from URL if it exists
+    //   const nextPath = searchParams.get('next') || '/';
+
+    //   // Use navigate for navigation
+    //   navigate(nextPath);
+    // }
     try {
       setIsProcessing(true);
       setError(null);
 
       console.log('Attempting to sign in with email:', values.email);
 
-      // Simple validation
       if (!values.email.trim() || !values.password) {
         setError('Email and password are required');
         return;
       }
 
-      // Sign in using the auth context
-      await login(values.email, values.password);
+      const apiUrl = import.meta.env.VITE_API_URL;
+      // data.token = localStorage.getItem("authToken", "17|4kFMlcEYgIVlT6JlwddrLDUkVfeKwcZF6CPldcDf5ef2ea7b");
 
-      // Get the 'next' parameter from URL if it exists
+      const response = await fetch(`${apiUrl}/login`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed. Please try again.');
+      }
+
+      localStorage.setItem('token', data.data.token);
+
+      // ✅ Navigate after login
       const nextPath = searchParams.get('next') || '/';
-
-      // Use navigate for navigation
       navigate(nextPath);
-    } catch (err) {
+    }
+    catch (err) {
       console.error('Unexpected sign-in error:', err);
       setError(
         err instanceof Error
           ? err.message
-          : 'An unexpected error occurred. Please try again.',
+          : 'An unexpected error occurred. Please try again.'
       );
     } finally {
       setIsProcessing(false);
     }
   }
-
-  // Handle Google Sign In with Supabase OAuth
-  const handleGoogleSignIn = async () => {
-    try {
-      setIsGoogleLoading(true);
-      setError(null);
-
-      // Get the next path if available
-      const nextPath = searchParams.get('next');
-
-      // Calculate the redirect URL
-      const redirectTo = nextPath
-        ? `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`
-        : `${window.location.origin}/auth/callback`;
-
-      console.log('Initiating Google sign-in with redirect:', redirectTo);
-
-      // Use our adapter to initiate the OAuth flow
-      await SupabaseAdapter.signInWithOAuth('google', { redirectTo });
-
-      // The browser will be redirected automatically
-    } catch (err) {
-      console.error('Google sign-in error:', err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Failed to sign in with Google. Please try again.',
-      );
-      setIsGoogleLoading(false);
-    }
-  };
 
   return (
     <Form {...form}>
@@ -162,7 +170,7 @@ export function SignInPage() {
           </p>
         </div>
 
-        <Alert appearance="light" size="sm" close={false}>
+        {/* <Alert appearance="light" size="sm" close={false}>
           <AlertIcon>
             <AlertCircle className="text-primary" />
           </AlertIcon>
@@ -170,9 +178,9 @@ export function SignInPage() {
             Use <strong>demo@kt.com</strong> username and {` `}
             <strong>demo123</strong> password for demo access.
           </AlertTitle>
-        </Alert>
+        </Alert> */}
 
-        <div className="flex flex-col gap-3.5">
+        {/* <div className="flex flex-col gap-3.5">
           <Button
             variant="outline"
             type="button"
@@ -190,16 +198,16 @@ export function SignInPage() {
               </>
             )}
           </Button>
-        </div>
+        </div> */}
 
-        <div className="relative py-1.5">
+        {/* <div className="relative py-1.5">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">or</span>
           </div>
-        </div>
+        </div> */}
 
         {error && (
           <Alert

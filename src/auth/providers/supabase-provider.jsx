@@ -94,8 +94,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     SupabaseAdapter.logout();
-    saveAuth(undefined);
-    setCurrentUser(undefined);
+    return navigate('/');
   };
 
   return (

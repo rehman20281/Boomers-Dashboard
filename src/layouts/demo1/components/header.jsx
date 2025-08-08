@@ -116,7 +116,9 @@ export function Header() {
 
         {/* Main Content (MegaMenu or Breadcrumbs) */}
         {pathname.startsWith('/account') ? (
-          <Breadcrumb />
+          <>
+            <Breadcrumb />
+          </>
         ) : (
           !mobileMode && <MegaMenu />
         )}

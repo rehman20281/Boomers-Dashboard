@@ -1,7 +1,11 @@
 export * from './basic-settings';
 export * from './calendar-accounts';
-export * from './community-badges';
+// export * from './community-badges';
 export * from './connections';
 export * from './personal-info';
+// export * from './Licensing-info';
 export * from './start-now';
 export * from './work';
+// export * from './bank';
+// export * from './Bio';
+// export * from './Login';

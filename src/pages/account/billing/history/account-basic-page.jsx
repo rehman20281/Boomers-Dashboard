@@ -53,7 +53,7 @@ export function AccountHistoryPage() {
           <div className="flex justify-between">
           <ToolbarPageTitle />
           <ToolbarActions>
-            <Popover open={isOpen} onOpenChange={setIsOpen}>
+            {/* <Popover open={isOpen} onOpenChange={setIsOpen}>
               <PopoverTrigger asChild>
                 <Button id="date" variant="outline">
                   <CalendarDays size={16} className="me-0.5" />
@@ -88,7 +88,7 @@ export function AccountHistoryPage() {
                   <Button onClick={handleDateRangeApply}>Apply</Button>
                 </div>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
           </ToolbarActions>
           </div>
           <ToolbarDescription>
@@ -101,7 +101,7 @@ export function AccountHistoryPage() {
       </Container>
       <Container className="flex justify-between">
         <PageNavbar />
-        {settings?.layout === 'demo1' && (
+        {/* {settings?.layout === 'demo1' && ( */}
           <Toolbar>
             <ToolbarActions>
               <Button variant="outline" style={{ marginBottom: '1.3rem' }}>Import CSV</Button>
@@ -109,7 +109,7 @@ export function AccountHistoryPage() {
               <Button variant="primary" style={{ marginBottom: '1.3rem' }}>Add Policies</Button>
             </ToolbarActions>
           </Toolbar>
-        )}
+        {/* )} */}
       </Container>
       <Container>
         <AccountHistoryContent />

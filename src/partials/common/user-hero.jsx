@@ -43,7 +43,8 @@ export function UserHero({ image, name, info }) {
     >
       <Container>
         <div className="flex flex-col items-center gap-2 lg:gap-3.5 py-4 lg:pt-5 lg:pb-10">
-          {image}
+          <img src={image} alt="" className='rounded-full border-3 border-green-500 size-[100px] shrink-0'/>
+          {/* {image} */}
           <div className="flex items-center gap-1.5">
             <div className="text-lg leading-5 font-semibold text-mono">
               {name}

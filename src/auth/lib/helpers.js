@@ -20,6 +20,8 @@ const getAuth = () => {
  * Save auth information to local storage
  */
 const setAuth = (auth) => {
+
+  console.log("auth:::::::::::", auth)
   setData(AUTH_LOCAL_STORAGE_KEY, auth);
 };
 

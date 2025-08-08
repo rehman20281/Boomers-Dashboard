@@ -13,9 +13,9 @@ import {
 
 const PageNavbar = () => {
   const { settings } = useSettings();
-  const accountMenuConfig = MENU_SIDEBAR?.['3']?.children;
+  const accountMenuConfig = MENU_SIDEBAR?.['0']?.children;
 
-  if (accountMenuConfig && settings?.layout === 'demo1') {
+  // if (accountMenuConfig && settings?.layout === 'demo1') {
     return (
       <Navbar>
         <Container>
@@ -23,9 +23,9 @@ const PageNavbar = () => {
         </Container>
       </Navbar>
     );
-  } else {
-    return <></>;
-  }
+  // } else {
+    // return <></>;
+  // }
 };
 
 export { PageNavbar };

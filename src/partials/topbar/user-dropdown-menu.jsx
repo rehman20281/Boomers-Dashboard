@@ -58,6 +58,11 @@ export function UserDropdownMenu({ trigger }) {
     setTheme(checked ? 'dark' : 'light');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Clear token from local storage
+    return window.location.href = '/'; // Redirect to login page
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
@@ -257,7 +262,7 @@ export function UserDropdownMenu({ trigger }) {
             variant="outline"
             size="sm"
             className="w-full"
-            onClick={logout}
+            onClick={handleLogout}
           >
             Logout
           </Button>

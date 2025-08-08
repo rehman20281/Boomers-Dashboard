@@ -18,27 +18,29 @@ export function AccountUserProfilePage() {
 
   return (
     <Fragment>
-      <PageNavbar />
-      {settings?.layout === 'demo1' && (
-        <Container>
+      <Container>
+        <Toolbar>
+          <ToolbarHeading>
+            <ToolbarPageTitle />
+            <toolbarHeading>
+              My Account
+            </toolbarHeading>
+            <ToolbarDescription>
+              Central Hub for Personal Customization
+            </ToolbarDescription>
+          </ToolbarHeading>
+        </Toolbar>
+      </Container>
+      <Container className="flex justify-between">
+        <PageNavbar />
+        {/* {settings?.layout === 'demo1' && ( */}
           <Toolbar>
-            <ToolbarHeading>
-              <ToolbarPageTitle />
-              <ToolbarDescription>
-                Central Hub for Personal Customization
-              </ToolbarDescription>
-            </ToolbarHeading>
             <ToolbarActions>
-              <Button variant="outline">
-                <Link to="#">Public Profile</Link>
-              </Button>
-              <Button>
-                <Link to="#">Account Settings</Link>
-              </Button>
+              <Button variant="primary" style={{ marginBottom: '1.3rem' }}>Add Agents</Button>
             </ToolbarActions>
           </Toolbar>
-        </Container>
-      )}
+        {/* )} */}
+      </Container>
       <Container>
         <AccountUserProfileContent />
       </Container>

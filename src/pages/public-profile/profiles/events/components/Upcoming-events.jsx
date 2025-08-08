@@ -144,7 +144,7 @@ const UpcomingEvents = () => {
           {/* Calendar Grid */}
           <div className="grid grid-cols-7 gap-2 text-center">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-              <div key={day} className="font-bold">{day}</div>
+              <div key={day} className="font-bold w-30">{day}</div>
             ))}
 
             {Array.from({ length: new Date(year, displayDate, 1).getDay() }).map((_, i) => (
@@ -162,7 +162,7 @@ const UpcomingEvents = () => {
               return (
                 <div
                   key={date}
-                  className={`p-2 rounded ${isToday ? 'bg-orange-400 text-white font-bold' : 'bg-gray-100'}`}
+                  className={`px-2 py-5 rounded h-30 w-30 ${isToday ? 'bg-orange-400 text-white font-bold' : 'bg-gray-100'}`}
                 >
                   {date}
                 </div>

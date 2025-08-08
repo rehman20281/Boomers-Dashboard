@@ -106,9 +106,14 @@ export function AppRoutingSetup() {
           <Route path="/events" element={<Events />} />
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
           <Route
+            path="/admin/agent/detail/:id"
+            exact
+            element={<ProfileDefaultPage />}
+          />        
+          {/* <Route
             path="/public-profile/profiles/default/"
             element={<ProfileDefaultPage />}
-          />
+          /> */}
 
           <Route
             path="/public-profile/profiles/creator"
@@ -194,7 +199,7 @@ export function AppRoutingSetup() {
           />
 
           <Route
-            path="/account/home/user-profile"
+            path="/admin/agent/detail/edit/:id"
             element={<AccountUserProfilePage />}
           />
 
@@ -231,7 +236,7 @@ export function AppRoutingSetup() {
 
           <Route path="/account/billing/plans" element={<AccountPlansPage />} />
           <Route
-            path="/account/billing/history"
+            path="/recent-signups"
             element={<AccountHistoryPage />}
           />
 

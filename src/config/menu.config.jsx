@@ -68,8 +68,8 @@ export const MENU_SIDEBAR = [
     title: 'Dashboards',
     icon: LayoutGrid,
     children: [
-      { title: 'Recent Signup', path: '/account/billing/history' },
-      { title: 'Profiles', path: '/public-profile/profiles/default' },
+      { title: 'Recent Signup', path: '/recent-signups' },
+      { title: 'Profiles', path: '/admin/agent/detail/:id' },
       { title: 'Policies', path: '/network/get-started' },
       { title: 'Carriers', path: '/network/get-started' },
       { title: 'Individuals', path: '/network/get-started' },
@@ -83,8 +83,8 @@ export const MENU_SIDEBAR = [
     title: 'Boomers Insurance',
     icon: LayoutGrid,
     children: [
-      { title: 'Recent Signup', path: '/account/billing/history' },
-      { title: 'Profiles', path: '/public-profile/profiles/default' },
+      { title: 'Recent Signup', path: '/recent-signups' },
+      { title: 'Profiles', path: '/admin/agent/detail/:id' },
       { title: 'Policies', path: '/network/get-started' },
       { title: 'Carriers', path: '/network/get-started' },
       { title: 'Individuals', path: '/network/get-started' },
@@ -98,8 +98,8 @@ export const MENU_SIDEBAR = [
     title: 'Boomers Academy',
     icon: LayoutGrid,
     children: [
-      { title: 'Recent Signup', path: '/account/billing/history' },
-      { title: 'Profiles', path: '/public-profile/profiles/default' },
+      { title: 'Recent Signup', path: '/recent-signups' },
+      { title: 'Profiles', path: '/admin/agent/detail/:id' },
       { title: 'Policies', path: '/network/get-started' },
       { title: 'Carriers', path: '/network/get-started' },
       { title: 'Individuals', path: '/network/get-started' },
@@ -109,21 +109,23 @@ export const MENU_SIDEBAR = [
       { title: 'More', path: '/network/get-started' },
     ],
   },
-  {
-    title: 'Network',
-    icon: Users,
-    children: [
-      { title: 'Recent Signup', path: '/account/billing/history' },
-      { title: 'Profiles', path: '/public-profile/profiles/default' },
-      { title: 'Policies', path: '/network/get-started' },
-      { title: 'Carriers', path: '/network/get-started' },
-      { title: 'Individuals', path: '/network/get-started' },
-      { title: 'Agents', path: '/network/get-started' },
-      { title: 'Leads', path: '/network/get-started' },
-      { title: 'Events', path: '/events' },
-      { title: 'More', path: '/network/get-started' },
-    ],
-  },
+  // {
+  //   title: 'Network',
+  //   icon: Users,
+  //   children: [
+  //     { title: 'Recent Signup', path: '/recent-signups' },
+  //     { title: 'Profiles', path: '/admin/agent/detail/:id' },
+  //     { title: 'Policies', path: '/network/get-started' },
+  //     { title: 'Carriers', path: '/network/get-started' },
+  //     { title: 'Individuals', path: '/network/get-started' },
+  //     { title: 'Agents', path: '/network/get-started' },
+  //     { title: 'Leads', path: '/network/get-started' },
+  //     { title: 'Events', path: '/events' },
+  //     { title: 'More', path: '/network/get-started' },
+  //   ],
+  // },
+
+
   // {
   //   title: 'Authentication',
   //   icon: ShieldUser,
@@ -333,7 +335,7 @@ export const MENU_SIDEBAR_COMPACT = [
       {
         title: 'Profiles',
         children: [
-          { title: 'Default', path: '/public-profile/profiles/default' },
+          { title: 'Default', path: '/admin/agent/detail/:id' },
           { title: 'Creator', path: '/public-profile/profiles/creator' },
           { title: 'Company', path: '/public-profile/profiles/company' },
           { title: 'NFT', path: '/public-profile/profiles/nft' },
@@ -408,7 +410,7 @@ export const MENU_SIDEBAR_COMPACT = [
             path: '/account/billing/enterprise',
           },
           { title: 'Plans', path: '/account/billing/plans' },
-          { title: 'Billing History', path: '/account/billing/history' },
+          { title: 'Billing History', path: '/recent-signups' },
         ],
       },
       {
@@ -629,7 +631,7 @@ export const MENU_MEGA = [
               {
                 title: 'Recent Signup',
                 // icon: Badge,
-                path: '/account/billing/history',
+                path: '/recent-signups',
               },
               {
                 title: 'Profiles',
@@ -823,7 +825,7 @@ export const MENU_MEGA = [
               { title: 'Basic Billing', path: '/account/billing/basic' },
               { title: 'Enterprise', path: '/account/billing/enterprise' },
               { title: 'Plans', path: '/account/billing/plans' },
-              { title: 'Billing History', path: '/account/billing/history' },
+              { title: 'Billing History', path: '/recent-signups' },
               { title: 'Tax Info', disabled: true },
               { title: 'Invoices', disabled: true },
               { title: 'Gateaways', disabled: true },
@@ -1091,7 +1093,7 @@ export const MENU_MEGA_MOBILE = [
           {
             title: 'Default',
             icon: Badge,
-            path: '/public-profile/profiles/default',
+            path: '/admin/agent/detail/:id',
           },
           {
             title: 'Creator',
@@ -1226,7 +1228,7 @@ export const MENU_MEGA_MOBILE = [
               { title: 'Basic Billing', path: '/account/billing/basic' },
               { title: 'Enterprise', path: '/account/billing/enterprise' },
               { title: 'Plans', path: '/account/billing/plans' },
-              { title: 'Billing History', path: '/account/billing/history' },
+              { title: 'Billing History', path: '/recent-signups' },
               { title: 'Tax Info', disabled: true },
               { title: 'Invoices', disabled: true },
               { title: 'Gateaways', disabled: true },
@@ -1565,7 +1567,7 @@ export const MENU_ROOT = [
     title: 'Public Profile',
     icon: UserCircle,
     rootPath: '/public-profile/',
-    path: 'public-profile/profiles/default',
+    path: 'admin/agent/detail/:id',
     childrenIndex: 2,
   },
   {

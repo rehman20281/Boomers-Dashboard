@@ -8,8 +8,8 @@ export function BrandedLayout() {
       <style>
         {`
           .branded-bg {
-            background-image: url('${toAbsoluteUrl('/media/images/2600x1600/1.png')}');
-          }
+            background-color: red;
+            }
           .dark .branded-bg {
             background-image: url('${toAbsoluteUrl('/media/images/2600x1600/1-dark.png')}');
           }
@@ -28,20 +28,19 @@ export function BrandedLayout() {
           <div className="flex flex-col p-8 lg:p-16 gap-4">
             <Link to="/">
               <img
-                src={toAbsoluteUrl('/media/app/mini-logo.svg')}
-                className="h-[28px] max-w-none"
+                src={toAbsoluteUrl('/media/app/logo.svg')}
+                className="h-[108px] max-w-none"
                 alt=""
               />
             </Link>
-
             <div className="flex flex-col gap-3">
-              <h3 className="text-2xl font-semibold text-mono">
+              <h3 className="text-2xl font-semibold text-mono" style={{ color: '#fff' }}>
                 Secure Dashboard Access
               </h3>
-              <div className="text-base font-medium text-secondary-foreground">
+              <div className="text-base font-medium text-secondary-foreground" style={{ color: '#fff' }}>
                 A robust authentication gateway ensuring
                 <br /> secure&nbsp;
-                <span className="text-mono font-semibold">
+                <span className="">
                   efficient user access
                 </span>
                 &nbsp;to the Metronic

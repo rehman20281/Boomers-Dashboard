@@ -268,8 +268,8 @@ export const SupabaseAdapter = {
   /**
    * Logout the current user
    */
-  async logout() {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw new Error(error.message);
+  logout() {
+    console.log('Logging out user from Supabase');
+    localStorage.removeItem('token');
   },
 };

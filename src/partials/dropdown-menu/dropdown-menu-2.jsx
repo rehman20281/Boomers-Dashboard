@@ -6,8 +6,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useNavigate } from 'react-router-dom';
 
-export function DropdownMenu2({ trigger }) {
+export function DropdownMenu2({ trigger, rowID }) {
+  const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
@@ -37,10 +39,10 @@ export function DropdownMenu2({ trigger }) {
           </Link>
         </DropdownMenuItem> */}
         <DropdownMenuItem asChild>
-          <Link to="/account/members/import-members">
+          <div onClick={(e) => { e.stopPropagation(); navigate(`/admin/agent/detail/edit/${rowID}`);}}>
             <FileInput />
             <span>Edit</span>
-          </Link>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to="/account/activity">

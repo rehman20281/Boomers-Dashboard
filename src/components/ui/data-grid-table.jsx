@@ -5,6 +5,8 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useDataGrid } from '@/components/ui/data-grid';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'lucide-react';
 
 const headerCellSpacingVariants = cva('', {
   variants: {
@@ -51,7 +53,7 @@ function DataGridTableBase({ children }) {
       className={cn(
         'w-full align-middle caption-bottom text-left rtl:text-right text-foreground font-normal text-sm',
         !props.tableLayout?.columnsDraggable &&
-          'border-separate border-spacing-0',
+        'border-separate border-spacing-0',
         props.tableLayout?.width === 'fixed' ? 'table-fixed' : 'table-auto',
         props.tableClassNames?.base,
       )}
@@ -131,11 +133,11 @@ function DataGridTableHeadRowCell({ children, header, dndRef, dndStyle }) {
         headerCellSpacing,
         props.tableLayout?.cellBorder && 'border-e',
         props.tableLayout?.columnsResizable &&
-          column.getCanResize() &&
-          'truncate',
+        column.getCanResize() &&
+        'truncate',
         props.tableLayout?.columnsPinnable &&
-          column.getCanPin() &&
-          '[&:not([data-pinned]):has(+[data-pinned])_div.cursor-col-resize:last-child]:opacity-0 [&[data-last-col=left]_div.cursor-col-resize:last-child]:opacity-0 [&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right]:last-child_div.cursor-col-resize:last-child]:opacity-0 [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-muted/90 data-pinned:backdrop-blur-xs',
+        column.getCanPin() &&
+        '[&:not([data-pinned]):has(+[data-pinned])_div.cursor-col-resize:last-child]:opacity-0 [&[data-last-col=left]_div.cursor-col-resize:last-child]:opacity-0 [&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right]:last-child_div.cursor-col-resize:last-child]:opacity-0 [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-muted/90 data-pinned:backdrop-blur-xs',
         header.column.columnDef.meta?.headerClassName,
         column.getIndex() === 0 ||
           column.getIndex() === header.headerGroup.headers.length - 1
@@ -176,7 +178,7 @@ function DataGridTableBody({ children }) {
       className={cn(
         '[&_tr:last-child]:border-0',
         props.tableLayout?.rowRounded &&
-          '[&_td:first-child]:rounded-s-lg [&_td:last-child]:rounded-e-lg',
+        '[&_td:first-child]:rounded-s-lg [&_td:last-child]:rounded-e-lg',
         props.tableClassNames?.body,
       )}
     >
@@ -194,11 +196,11 @@ function DataGridTableBodyRowSkeleton({ children }) {
         'hover:bg-muted/40 data-[state=selected]:bg-muted/50',
         props.onRowClick && 'cursor-pointer',
         !props.tableLayout?.stripped &&
-          props.tableLayout?.rowBorder &&
-          'border-b border-border [&:not(:last-child)>td]:border-b',
+        props.tableLayout?.rowBorder &&
+        'border-b border-border [&:not(:last-child)>td]:border-b',
         props.tableLayout?.cellBorder && '[&_>:last-child]:border-e-0',
         props.tableLayout?.stripped &&
-          'odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted',
+        'odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted',
         table.options.enableRowSelection && '[&_>:first-child]:relative',
         props.tableClassNames?.bodyRow,
       )}
@@ -221,12 +223,12 @@ function DataGridTableBodyRowSkeletonCell({ children, column }) {
         bodyCellSpacing,
         props.tableLayout?.cellBorder && 'border-e',
         props.tableLayout?.columnsResizable &&
-          column.getCanResize() &&
-          'truncate',
+        column.getCanResize() &&
+        'truncate',
         column.columnDef.meta?.cellClassName,
         props.tableLayout?.columnsPinnable &&
-          column.getCanPin() &&
-          '[&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-background/90 data-pinned:backdrop-blur-xs"',
+        column.getCanPin() &&
+        '[&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-background/90 data-pinned:backdrop-blur-xs"',
         column.getIndex() === 0 ||
           column.getIndex() === table.getVisibleFlatColumns().length - 1
           ? props.tableClassNames?.edgeCell
@@ -241,6 +243,8 @@ function DataGridTableBodyRowSkeletonCell({ children, column }) {
 function DataGridTableBodyRow({ children, row, dndRef, dndStyle }) {
   const { props, table } = useDataGrid();
 
+  const navigate = useNavigate();
+
   return (
     <tr
       ref={dndRef}
@@ -250,16 +254,20 @@ function DataGridTableBodyRow({ children, row, dndRef, dndStyle }) {
           ? 'selected'
           : undefined
       }
-      onClick={() => props.onRowClick && props.onRowClick(row.original)}
+      // onClick={() => props.onRowClick && props.onRowClick(row.original)}
+      onClick={() => {
+        navigate(`/admin/agent/detail/${row.original.id}`);
+      }}
+
       className={cn(
         'hover:bg-muted/40 data-[state=selected]:bg-muted/50',
         props.onRowClick && 'cursor-pointer',
         !props.tableLayout?.stripped &&
-          props.tableLayout?.rowBorder &&
-          'border-b border-border [&:not(:last-child)>td]:border-b',
+        props.tableLayout?.rowBorder &&
+        'border-b border-border [&:not(:last-child)>td]:border-b',
         props.tableLayout?.cellBorder && '[&_>:last-child]:border-e-0',
         props.tableLayout?.stripped &&
-          'odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted',
+        'odd:bg-muted/90 hover:bg-transparent odd:hover:bg-muted',
         table.options.enableRowSelection && '[&_>:first-child]:relative',
         props.tableClassNames?.bodyRow,
       )}
@@ -321,12 +329,12 @@ function DataGridTableBodyRowCell({ children, cell, dndRef, dndStyle }) {
         bodyCellSpacing,
         props.tableLayout?.cellBorder && 'border-e',
         props.tableLayout?.columnsResizable &&
-          column.getCanResize() &&
-          'truncate',
+        column.getCanResize() &&
+        'truncate',
         cell.column.columnDef.meta?.cellClassName,
         props.tableLayout?.columnsPinnable &&
-          column.getCanPin() &&
-          '[&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-background/90 data-pinned:backdrop-blur-xs"',
+        column.getCanPin() &&
+        '[&[data-pinned=left][data-last-col=left]]:border-e! [&[data-pinned=right][data-last-col=right]]:border-s! [&[data-pinned][data-last-col]]:border-border data-pinned:bg-background/90 data-pinned:backdrop-blur-xs"',
         column.getIndex() === 0 ||
           column.getIndex() === row.getVisibleCells().length - 1
           ? props.tableClassNames?.edgeCell
@@ -442,9 +450,9 @@ function DataGridTable() {
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                     {props.tableLayout?.columnsResizable &&
                       column.getCanResize() && (
                         <DataGridTableHeadRowCellResize header={header} />
@@ -463,8 +471,8 @@ function DataGridTable() {
 
       <DataGridTableBody>
         {props.loadingMode === 'skeleton' &&
-        isLoading &&
-        pagination?.pageSize ? (
+          isLoading &&
+          pagination?.pageSize ? (
           Array.from({ length: pagination.pageSize }).map((_, rowIndex) => (
             <DataGridTableBodyRowSkeleton key={rowIndex}>
               {table.getVisibleFlatColumns().map((column, colIndex) => {
