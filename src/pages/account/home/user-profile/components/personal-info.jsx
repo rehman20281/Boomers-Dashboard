@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HexagonBadge } from '@/partials/common/hexagon-badge';
 import { MessagesSquare, Truck, Volleyball, Zap } from 'lucide-react';
+import { getAgentById } from '@/utils/agentService';
+import { updateUser } from '@/utils/agentService';
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -18,11 +20,70 @@ const handleChange = (e) => {
   }));
 };
 
-const PersonalInfo = (data) => {
+const PersonalInfo = () => {
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    gender: '',
+    phoneNumber: '',
+    npn: '',
+  });
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    // console.log("Hello world")
+    handleAutoFetch();
+  }, []);
+  const handleAutoFetch = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+
+    getAgentById(id)
+      .then((response) => {
+        const agentsArray = response.data.agent;
+        setData(agentsArray || []);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  console.log("Data to update:", data);
+  const handleSave = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+    updateUser(id, data)
+      .then((response) => {
+        console.log("User updated successfully:", response.data);
+        setMessage("User updated successfully");
+        setLoading(false);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
+  // console.log("Fetched agents data:", data);
   return (
+
     <Card className="min-w-full">
       <CardHeader>
         <CardTitle>Personal Info</CardTitle>
+        <button onClick={handleSave}>Save</button>
       </CardHeader>
       <CardContent className="kt-scrollable-x-auto pb-3 p-0">
         <Table className="align-middle text-sm text-muted-foreground">
@@ -100,7 +161,37 @@ const PersonalInfo = (data) => {
   );
 };
 
-const LicensingInfo = (data) => {
+const LicensingInfo = () => {
+  const [data, setData] = useState({
+    ssn: '',
+    rls: '',
+    osli: '',
+    upline: '',
+    eo: '',
+  });
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    // console.log("Hello world")
+    handleAutoFetch();
+  }, []);
+  const handleAutoFetch = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+
+    getAgentById(id)
+      .then((response) => {
+        const agentsArray = response.data.agent;
+        setData(agentsArray || []);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
   return (
     <Card className="min-w-full">
       <CardHeader>
@@ -109,14 +200,6 @@ const LicensingInfo = (data) => {
       <CardContent className="kt-scrollable-x-auto pb-3 p-0">
         <Table className="align-middle text-sm text-muted-foreground">
           <TableBody>
-            <TableRow>
-              <TableCell className="py-2 text-secondary-foreground font-normal">
-                National Producer Number
-              </TableCell>
-              <TableCell className="py-2 text-foreground font-normaltext-sm">
-                <input type="text" value={data.npn ?? 'N/A'} name='npn' onChange={handleChange} />
-              </TableCell>
-            </TableRow>
             <TableRow>
               <TableCell className="py-3 text-secondary-foreground font-normal">
                 Social Security Number
@@ -249,7 +332,34 @@ const CommunityBadges = ({ title }) => {
   );
 };
 
-const LoginInfo = (data) => {
+const LoginInfo = () => {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    // console.log("Hello world")
+    handleAutoFetch();
+  }, []);
+  const handleAutoFetch = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+
+    getAgentById(id)
+      .then((response) => {
+        const agentsArray = response.data.agent;
+        setData(agentsArray || []);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
   return (
     <Card className="min-w-full">
       <CardHeader>
@@ -281,7 +391,38 @@ const LoginInfo = (data) => {
   );
 };
 
-const BankInfo = (data) => {
+const BankInfo = () => {
+  const [data, setData] = useState({
+    name: '',
+    bankName: '',
+    accountNumber: '',
+    routingNumber: '',
+    accountType: '',
+    address: '',
+  });
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    // console.log("Hello world")
+    handleAutoFetch();
+  }, []);
+  const handleAutoFetch = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+
+    getAgentById(id)
+      .then((response) => {
+        const agentsArray = response.data.agent;
+        setData(agentsArray || []);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
   return (
     <Card className="min-w-full">
       <CardHeader>

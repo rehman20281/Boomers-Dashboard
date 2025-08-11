@@ -35,7 +35,7 @@ export function ProfileDefaultContent() {
           <div className="flex flex-col gap-5 lg:gap-7.5">
             <div className="flex flex-col gap-5 lg:gap-7.5">
               {/* <UnlockPartnerships /> */}
-              <MediaUploads />
+              {/* <MediaUploads /> */}
             </div>
             <UpcomingEvents />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-7.5">

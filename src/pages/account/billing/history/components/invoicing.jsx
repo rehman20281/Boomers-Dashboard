@@ -661,7 +661,7 @@ import DataTable from 'react-data-table-component';
 import { formatDistanceToNow } from 'date-fns';
 import styled from 'styled-components';
 import { faker } from '@faker-js/faker';
-
+import {getAgents} from '@/utils/agentService';
 
 
 
@@ -858,33 +858,10 @@ function Invoicing() {
     setMessage("");
     setErrors({});
 
-    try {
-      const apiUrl = import.meta.env.VITE_API_URL;
 
-      const response = await fetch(`${apiUrl}/admin/agents/list`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-
-      const resData = await response.json(); // renamed from 'data'
-
-      if (!response.ok) {
-        if (resData.errors) {
-          setErrors(resData.errors);
-          setMessage(resData.message || "Validation failed");
-          console.log("Validation failed");
-        } else {
-          setMessage(resData.message || "Something went wrong");
-          console.log("Something went wrong");
-        }
-        return;
-      }
-
-      if (resData.data.agents.length > 0) {
-        const agentsArray = resData.data.agents;
+    getAgents()
+    .then((data) => {
+      const agentsArray = data.data.agents;
 
         const formattedData = agentsArray.map((agent, index) => ({
           id: agent.id, // Unique ID
@@ -898,18 +875,9 @@ function Invoicing() {
         }));
 
         setData(formattedData);
-      } else {
-        setMessage("No agents found.");
-        setData([]);
-      }
-      console.log("Data loaded successfully:", data);
-      setMessage("Data loaded successfully!");
-    } catch (err) {
-      setMessage("An unexpected error occurred. Please try again.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    })
+      .catch((err) => console.error("Error fetching users:", err));
+
   };
 
   const [filterText, setFilterText] = React.useState('');

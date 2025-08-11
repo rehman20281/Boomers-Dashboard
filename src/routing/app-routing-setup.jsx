@@ -236,6 +236,7 @@ export function AppRoutingSetup() {
 
           <Route path="/account/billing/plans" element={<AccountPlansPage />} />
           <Route
+            exact
             path="/recent-signups"
             element={<AccountHistoryPage />}
           />
