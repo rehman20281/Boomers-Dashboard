@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import { HexagonBadge } from '@/partials/common/hexagon-badge';
 import { MessagesSquare, Truck, Volleyball, Zap } from 'lucide-react';
 import { getAgentById } from '@/utils/agentService';
-import { updateUser } from '@/utils/agentService';
+import { updateAgent } from '@/utils/agentService';
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -21,6 +21,7 @@ const handleChange = (e) => {
 };
 
 const PersonalInfo = () => {
+  const [update, setUpdate] = useState(false)
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -33,6 +34,15 @@ const PersonalInfo = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [errors, setErrors] = useState({});
+
+  // const [file, setFile] = useState(null);
+
+  // const handleFileChange = (e) => {
+  //   // e.target.files is a FileList, we take the first file
+  //   setFile(e.target.files[0]);
+  // };
+
+
   useEffect(() => {
     // console.log("Hello world")
     handleAutoFetch();
@@ -59,31 +69,61 @@ const PersonalInfo = () => {
       ...prevData,
       [name]: value
     }));
+    setUpdate(true);
   };
 
-  console.log("Data to update:", data);
+  // console.log("Data to update:", data);
   const handleSave = async () => {
-    console.log("Fetching agents data...");
+    console.log("Updating agent data...");
     setLoading(true);
     setMessage("");
     setErrors({});
 
-    updateUser(id, data)
-      .then((response) => {
-        console.log("User updated successfully:", response.data);
-        setMessage("User updated successfully");
-        setLoading(false);
-      })
-      .catch((err) => console.error("Error fetching users:", err));
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL; // or your base API URL
+      const token = localStorage.getItem("token");
+      const agentId = data.id; // assuming you have agentId in data
 
+      // Create FormData
+      const formData = new FormData();
+      formData.append("firstName", data.firstName);
+      formData.append("lastName", data.lastName);
+      formData.append("npn", data.npn);
+      formData.append("phoneNumber", data.phoneNumber);
+      formData.append("profile", data.profile); // This should be a File object
+      formData.append("_method", "PUT"); // tell backend it's a PUT request
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      updateAgent(formData, agentId)
+        .then((response) => {
+          console.log("Agent updated successfully:", response.data);
+          setMessage("Agent updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating agent:", error);
+          setErrors({ general: error.message });
+        });
+
+    } catch (err) {
+      console.error("Error updating user:", err);
+      setErrors({ general: err.message });
+    } finally {
+      setLoading(false);
+    }
   };
+
   // console.log("Fetched agents data:", data);
   return (
-
     <Card className="min-w-full">
       <CardHeader>
         <CardTitle>Personal Info</CardTitle>
-        <button onClick={handleSave}>Save</button>
+        { update ? 
+          <Button  onClick={handleSave} className="bg-blue-500 text-white hover:bg-blue-600 cursor-pointer ">Update</Button> 
+            :
+          <Button disabled className="bg-gray-500 text-white">Update</Button>
+        }
       </CardHeader>
       <CardContent className="kt-scrollable-x-auto pb-3 p-0">
         <Table className="align-middle text-sm text-muted-foreground">
@@ -162,6 +202,7 @@ const PersonalInfo = () => {
 };
 
 const LicensingInfo = () => {
+  const [update, setUpdate] = useState(false);
   const [data, setData] = useState({
     ssn: '',
     rls: '',
@@ -173,6 +214,10 @@ const LicensingInfo = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [errors, setErrors] = useState({});
+
+
+
+
   useEffect(() => {
     // console.log("Hello world")
     handleAutoFetch();
@@ -192,10 +237,67 @@ const LicensingInfo = () => {
       .catch((err) => console.error("Error fetching users:", err));
 
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+    setUpdate(true);
+  };
+
+  // console.log("Data to update:", data);
+  const handleSave = async () => {
+    console.log("Updating agent data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL; // or your base API URL
+      const token = localStorage.getItem("token");
+      const agentId = data.id; // assuming you have agentId in data
+
+      // Create FormData
+      const formData = new FormData();
+      formData.append("ssn", data.ssn);
+      formData.append("rls", data.rls);
+      formData.append("osli", data.osli);
+      formData.append("upline", data.upline);
+      formData.append("eo", data.eo);
+      formData.append("_method", "PUT"); // tell backend it's a PUT request
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      updateAgent(formData, agentId)
+        .then((response) => {
+          console.log("Agent updated successfully:", response.data);
+          setMessage("Agent updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating agent:", error);
+          setErrors({ general: error.message });
+        });
+
+    } catch (err) {
+      console.error("Error updating user:", err);
+      setErrors({ general: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+  console.log("Profile:", data.profile);
   return (
     <Card className="min-w-full">
       <CardHeader>
         <CardTitle>Licensing Info</CardTitle>
+        { update ? 
+          <Button  onClick={handleSave} className="bg-blue-500 text-white hover:bg-blue-600 cursor-pointer ">Update</Button> 
+            :
+          <Button disabled className="bg-gray-500 text-white">Update</Button>
+        }
       </CardHeader>
       <CardContent className="kt-scrollable-x-auto pb-3 p-0">
         <Table className="align-middle text-sm text-muted-foreground">
@@ -248,18 +350,145 @@ const LicensingInfo = () => {
 };
 
 const Bio = () => {
-  const [data, setData] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    gender: '',
+    phoneNumber: '',
+    npn: '',
+    profile: '', // Use the actual File object
+    description: '',
+  });
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [errors, setErrors] = useState({});
+
+  // const [file, setFile] = useState(null);
+
+  // const handleFileChange = (e) => {
+  //   // e.target.files is a FileList, we take the first file
+  //   setFile(e.target.files[0]);
+  // };
+
+
+  useEffect(() => {
+    // console.log("Hello world")
+    handleAutoFetch();
+  }, []);
+  const handleAutoFetch = async () => {
+    console.log("Fetching agents data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+
+    getAgentById(id)
+      .then((response) => {
+        const agentsArray = response.data.agent;
+        setData(agentsArray || []);
+      })
+      .catch((err) => console.error("Error fetching users:", err));
+
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+    setUpdate(true);
+  };
+
+  // console.log("Data to update:", data);
+  const handleSave = async () => {
+    console.log("Updating agent data...");
+    setLoading(true);
+    setMessage("");
+    setErrors({});
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL; // or your base API URL
+      const token = localStorage.getItem("token");
+      const agentId = data.id; // assuming you have agentId in data
+
+      // Create FormData
+      const formData = new FormData();
+      formData.append("firstName", data.firstName);
+      formData.append("lastName", data.lastName);
+      formData.append("npn", data.npn);
+      formData.append("phoneNumber", data.phoneNumber);
+      formData.append("profile", data.profile); // This should be a File object
+      formData.append("description", data.description);
+      formData.append("_method", "PUT"); // tell backend it's a PUT request
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      updateAgent(formData, agentId)
+        .then((response) => {
+          console.log("Agent updated successfully:", response.data);
+          setMessage("Agent updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating agent:", error);
+          setErrors({ general: error.message });
+        });
+
+    } catch (err) {
+      console.error("Error updating user:", err);
+      setErrors({ general: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const WORD_LIMIT = 150;
   return (
     <Card className="min-w-full">
       <CardHeader>
         <CardTitle>Bio</CardTitle>
+        { update ? 
+          <Button  onClick={handleSave} className="bg-blue-500 text-white hover:bg-blue-600 cursor-pointer ">Update</Button> 
+            :
+          <Button disabled className="bg-gray-500 text-white">Update</Button>
+        }
       </CardHeader>
       <CardContent className="kt-scrollable-x-auto pb-3 p-0">
         <Table className="align-middle text-sm text-muted-foreground">
           <TableBody>
             <TableRow>
               <TableCell className="py-2 text-secondary-foreground font-normal">
-                Lorem ipsum dolor sit amet consectetur. Iaculis scelerisque nunc tellus lacus vitae odio. Lobortis at senectus adipiscing donec cras mauris risus nulla elementum. In sit posuere eget ut. Donec facilisis erat eu molestie. Est blandit sit orci commodo velit faucibus. Lorem malesuada ornare auctor nam viverra amet platea sollicitudin enim.
+                <textarea
+                  value={data.description ?? "N/A"}
+                  name="description"
+                  onChange={(e) => {
+                    const words = e.target.value.trim().split(/\s+/);
+                    if (words.length <= WORD_LIMIT) {
+                      handleChange(e); // ✅ your existing change handler
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                    minHeight: "100px",
+                    resize: "none",
+                    overflow: "hidden"
+                  }}
+                  rows={1}
+                  onInput={(e) => {
+                    e.target.style.height = "auto"; // Reset height
+                    e.target.style.height = e.target.scrollHeight + "px"; // Set new height
+                  }}
+                />
+                <p>
+                  {data.description
+                    ? data.description.trim().split(/\s+/).length
+                    : 0}{" "}
+                  / {WORD_LIMIT} words
+                </p>
               </TableCell>
             </TableRow>
           </TableBody>

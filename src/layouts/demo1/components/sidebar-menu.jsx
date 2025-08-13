@@ -194,7 +194,7 @@ export function SidebarMenu() {
   };
 
   return (
-    <div className="kt-scrollable-y-hover flex grow shrink-0 py-5 px-5 lg:max-h-[calc(100vh-5.5rem)]">
+    <div className="kt-scrollable-y-hover flex grow shrink-0 py-5 px-5 my-6 lg:max-h-[calc(100vh-5.5rem)]">
       <AccordionMenu
         selectedValue={pathname}
         matchPath={matchPath}

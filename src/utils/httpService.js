@@ -3,11 +3,19 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 async function request(url, options = {}) {
   const token = localStorage.getItem("token"); // Or from Redux/Context
 
-  const headers = {
-    "Content-Type": "application/json",
+
+   let headers = {
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers,
   };
+
+  // If the body is FormData, don't set Content-Type (browser will handle it)
+  const isFormData = options.body instanceof FormData;
+  
+  // console.log ("::::::::::::::::::::::::",isFormData);
+  if (!isFormData && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
+  }
 
   try {
     const response = await fetch(BASE_URL + url, {
@@ -33,6 +41,7 @@ async function request(url, options = {}) {
     console.error("HTTP Error:", error.message);
     throw error;
   }
+
 }
 
 // Reusable helpers
@@ -40,6 +49,9 @@ export const http = {
   get: (url, options) => request(url, { method: "GET", ...options }),
   post: (url, body, options) =>
     request(url, { method: "POST", body: JSON.stringify(body), ...options }),
+  postFormData: (url, body, options) =>
+    request(url, { method: "POST", body: body, ...options }),
+
   put: (url, body, options) =>
     request(url, { method: "PUT", body: JSON.stringify(body), ...options }),
   patch: (url, body, options) =>

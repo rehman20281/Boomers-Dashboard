@@ -28,18 +28,18 @@ export function AccountBasicContent() {
   ];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
+    <div className="grid grid-cols-1 ">
       <div className="col-span-2">
         <div className="flex flex-col gap-5 lg:gap-7.5">
-          <Plan />
+          {/* <Plan /> */}
           <PaymentMethods />
-          <Details />
-          <Invoicing />
+          {/* <Details /> */}
+          {/* <Invoicing /> */}
         </div>
       </div>
       <div className="col-span-1">
         <div className="flex flex-col gap-5 lg:gap-7.5">
-          <HighlightedPosts posts={posts} />
+          {/* <HighlightedPosts posts={posts} /> */}
         </div>
       </div>
     </div>

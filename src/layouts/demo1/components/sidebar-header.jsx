@@ -22,8 +22,8 @@ export function SidebarHeader() {
         <div className="dark:hidden">
           <img
             src={logo}
-            className="default-logo h-[88px] max-w-none"
-            style={{marginLeft: '4rem', marginTop: '2rem'}}
+            className="default-logo h-[98px]  max-w-none"
+            style={{marginLeft: '4rem', marginTop: '3rem'}}
             alt="Default Logo"
           />
 

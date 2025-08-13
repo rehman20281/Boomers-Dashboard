@@ -13,8 +13,6 @@ const CardProjectRow = ({
   name,
   description,
   status,
-  progress,
-  team,
 }) => {
   return (
     <Card className="p-7">
@@ -44,20 +42,20 @@ const CardProjectRow = ({
             <Badge size="lg" variant={status.variant} appearance="light">
               {status.label}
             </Badge>
-            <Progress
+            {/* <Progress
               value={progress?.value}
               indicatorClassName={progress?.variant}
               className="h-1.5 w-36"
-            />
+            /> */}
           </div>
           <div className="flex items-center gap-5 lg:gap-14">
-            <div className="flex justify-end w-24">
+            {/* <div className="flex justify-end w-24">
               <AvatarGroup
                 group={team.group}
                 size={team.size}
                 more={team.more}
               />
-            </div>
+            </div> */}
             <DropdownMenu3
               trigger={
                 <Button variant="ghost" mode="icon">

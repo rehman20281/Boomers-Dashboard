@@ -15,6 +15,8 @@ import { toAbsoluteUrl } from '@/lib/helpers';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/common/container';
 import { Projects2 } from './components';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 export function ProjectColumn3Page() {
   const image = (
@@ -27,7 +29,7 @@ export function ProjectColumn3Page() {
 
   return (
     <Fragment>
-      <UserHero
+      {/* <UserHero
         name="Jenny Klabber"
         image={image}
         info={[
@@ -35,25 +37,31 @@ export function ProjectColumn3Page() {
           { label: 'SF, Bay Area', icon: MapPin },
           { email: 'jenny@kteam.com', icon: Mail },
         ]}
-      />
+      /> */}
+      <Container className="mb-10">
+        <h5>
+          Carriers
+        </h5>
+        <p className="text-secondary-foreground">
+          400+ Carriers
+        </p>
+      </Container>
 
       <Container>
         <Navbar>
           <PageMenu />
           <NavbarActions>
+            <div className="relative">
+              <Search className="size-4 text-muted-foreground absolute start-3 top-1/2 -translate-y-1/2" />
+              <Input
+                placeholder="Search Agents"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="ps-9 w-40"
+              />
+            </div>
             <Button>
-              <Users /> Connect
+              New Carrier
             </Button>
-            <Button variant="outline" mode="icon">
-              <MessagesSquare />
-            </Button>
-            <DropdownMenu9
-              trigger={
-                <Button variant="outline" mode="icon">
-                  <EllipsisVertical />
-                </Button>
-              }
-            />
           </NavbarActions>
         </Navbar>
       </Container>

@@ -9,11 +9,8 @@ const CardProject = ({
   logo,
   name,
   description,
-  startDate,
-  endDate,
   status,
-  progress,
-  team,
+  state,
 }) => {
   return (
     <Card className="p-7.5">
@@ -38,7 +35,16 @@ const CardProject = ({
         </Link>
         <span className="text-sm text-secondary-foreground">{description}</span>
       </div>
-      <div className="flex items-center gap-5 mb-3.5 lg:mb-7">
+      <div className="flex flex-col mb-3 lg:mb-6">
+        <Link
+          to="#"
+          className="text-lg font-media/brand text-mono hover:text-primary-active mb-px"
+        >
+          State of Operation
+        </Link>
+        <span className="text-sm text-secondary-foreground">{state}</span>
+      </div>
+      {/* <div className="flex items-center gap-5 mb-3.5 lg:mb-7">
         <span className="text-sm text-secondary-foreground">
           Start:{' '}
           <span className="text-sm font-medium text-foreground">
@@ -49,14 +55,14 @@ const CardProject = ({
           End:{' '}
           <span className="text-sm font-medium text-foreground">{endDate}</span>
         </span>
-      </div>
-      <Progress
+      </div> */}
+      {/* <Progress
         value={progress?.value}
         indicatorClassName={progress?.variant}
         className="h-1.5 mb-4 lg:mb-8"
-      />
+      /> */}
 
-      <AvatarGroup group={team.group} size={team.size} more={team.more} />
+      {/* <AvatarGroup group={team.group} size={team.size} more={team.more} /> */}
     </Card>
   );
 };

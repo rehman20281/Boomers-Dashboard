@@ -1,5 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { getAcceptTypeString, getListFiles, openFileDialog } from './utils';
+import { updateAgent } from '@/utils/agentService';
+import { useParams } from 'react-router-dom';
 
 export const DEFAULT_NULL_INDEX = -1;
 export const DEFAULT_DATA_URL_KEY = 'dataURL';
@@ -16,6 +18,14 @@ const ImageInput = ({
   const inputRef = useRef(null);
   const [keyUpdate, setKeyUpdate] = useState(DEFAULT_NULL_INDEX);
   const [isDragging, setIsDragging] = useState(false);
+
+  const [data, setData] = useState({
+    profile: '', // Use the actual File object
+  });
+  const { id } = useParams();
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const onImageRemoveAll = useCallback(() => {
     onChange?.([]);
@@ -55,6 +65,53 @@ const ImageInput = ({
       updatedIndexes.push(0);
     }
     onChange?.(updatedFileList, updatedIndexes);
+    console.log('Updated file list:', updatedFileList);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL; // Your base API URL
+      const token = localStorage.getItem("token");
+      const agentId = id; // From route params or state
+
+      // Make sure we have at least one file
+      if (!updatedFileList || !updatedFileList[0] || !updatedFileList[0].file) {
+        console.error("No file selected for upload.");
+        setErrors({ profile: "Please select a profile image" });
+        return;
+      }
+
+
+      // Create FormData
+      const formData = new FormData();
+      formData.append("profile", updatedFileList[0].dataURL); // Send the actual File object
+      formData.append("_method", "PUT"); // Laravel needs this for PUT via POST
+
+      // Debug log: show all form data
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      setData({
+        profile: updatedFileList[0].dataURL, // Store the data URL for display
+      });
+      console.log("Submitting form data:", agentId);
+
+      // API call
+      updateAgent(data, agentId)
+        .then((response) => {
+          console.log("Agent updated successfully:", response.data);
+          setMessage("Agent updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating agent:", error.response?.data || error.message);
+          setErrors({ general: error.response?.data?.message || error.message });
+        });
+
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      setErrors({ general: error.message });
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   const onImageRemove = (index) => {

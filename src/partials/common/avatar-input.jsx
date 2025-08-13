@@ -11,6 +11,7 @@ import {
 import { ImageInput } from '@/components/image-input';
 
 export function AvatarInput() {
+  
   const [avatar, setAvatar] = useState([
     { dataURL: toAbsoluteUrl(`/media/avatars/300-2.png`) },
   ]);

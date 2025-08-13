@@ -4,26 +4,39 @@ import { toAbsoluteUrl } from '@/lib/helpers';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { EllipsisVertical } from 'lucide-react';
 
 const PaymentMethods = () => {
   const items = [
     {
       logo: 'visa.svg',
-      title: 'Jason Tatum',
-      email: 'Ending 3604  Expires on 12/2026',
+      title: 'Aetna',
+      email: 'Health Insurance Plans',
       label: true,
     },
     {
       logo: 'ideal.svg',
-      title: 'Jason Tatum',
-      email: 'iDeal with ABN Ambro',
-      label: false,
+      title: 'Aetna',
+      email: 'Medicare Suplement',
+      label: true,
     },
     {
       logo: 'paypal.svg',
-      title: 'Jason Tatum',
-      email: 'jasontt@studio.co',
-      label: false,
+      title: 'Align',
+      email: 'Transforming Smiles, Changing Lives',
+      label: true,
+    },
+    {
+      logo: 'ideal.svg',
+      title: 'Amerigroup',
+      email: 'RealSolutions in healthcare',
+      label: true,
+    },
+    {
+      logo: 'visa.svg',
+      title: 'Aetna',
+      email: 'Health Insurance Plans',
+      label: true,
     },
   ];
 
@@ -55,15 +68,12 @@ const PaymentMethods = () => {
         <div className="flex items-center gap-5">
           {item.label && (
             <Badge variant="success" appearance="light">
-              Primary
+              Active
             </Badge>
           )}
           <div className="flex gap-0.5">
-            <Button variant="ghost">
-              <SquarePen />
-            </Button>
-            <Button variant="ghost">
-              <Trash2 />
+            <Button variant="ghost" mode="icon">
+              <EllipsisVertical />
             </Button>
           </div>
         </div>
@@ -73,13 +83,13 @@ const PaymentMethods = () => {
 
   return (
     <Card className="grow">
-      <CardHeader>
+      {/* <CardHeader>
         <CardTitle>Payment Methods</CardTitle>
         <Button variant="outline">
           <SquarePlus size={16} />
           Add New
         </Button>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent className="lg:pb-7.5">
         <div className="grid gap-5">
           {items.map((item, index) => {
