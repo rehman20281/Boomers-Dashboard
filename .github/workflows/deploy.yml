@@ -22,14 +22,6 @@ jobs:
     
     - name: Build
       run: npm run build
-      
-    - name: Add cache busting
-      run: |
-        cd dist
-        find . -name "*.js" -o -name "*.css" | while read file; do
-          timestamp=$(date +%s)
-          mv "$file" "${file%.*}-${timestamp}.${file##*.}"
-        done
     
     - name: Deploy to Boomers Insurance
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -40,6 +32,7 @@ jobs:
         port: 21
         local-dir: ./dist/
         server-dir: /portal.boomersinsuranceservices.com/public_html/
+        dangerous-clean-slate: true
         
     - name: Clear server cache
       uses: appleboy/ssh-action@v1.2.0
