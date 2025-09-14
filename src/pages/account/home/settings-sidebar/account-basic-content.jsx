@@ -83,15 +83,15 @@ export function AccountSettingsSidebarContent() {
         <AuthEmail />
         <AuthPassword />
         <AuthSocialSignIn />
-        <AuthSingleSingOn />
-        <AuthTwoFactor />
+        {/* <AuthSingleSingOn /> */}
+        {/* <AuthTwoFactor />
         <AdvancedSettingsPreferences />
         <AdvancedSettingsAppearance title={''} />
         <AdvancedSettingsNotifications />
         <AdvancedSettingsAddress />
         <ExternalServicesManageApi title={''} switch={false} />
         <ExternalServicesIntegrations />
-        <DeleteAccount />
+        <DeleteAccount /> */}
       </div>
     </div>
   );

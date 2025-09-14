@@ -95,8 +95,15 @@ import {
   StoreClientPage,
   WishlistPage,
 } from '@/pages/store-client';
+import { AccountProfilePage } from '@/pages/Profile/account-page';
+import { Step1 } from '@/pages/public-profile/Get-Contracted/Step1';
+import { Step2 } from '@/pages/public-profile/Get-Contracted/Step2';
+import { Step3 } from '@/pages/public-profile/Get-Contracted/Step3';
+import { GetContractedCompleted } from '@/pages/public-profile/Get-Contracted/Get-Contracted-Completed';
+import { MyContracts } from '@/pages/public-profile/Contracts/My-Contracts';
 import { Navigate, Route, Routes } from 'react-router';
-
+import { LeadsPage, LeadsOtherInfoPage } from '@/pages/Leads';
+import { NewCarrier } from '@/pages/Carriers/New-Carrier'
 export function AppRoutingSetup() {
   return (
     <Routes>
@@ -104,15 +111,29 @@ export function AppRoutingSetup() {
         <Route element={<Demo1Layout />}>
           <Route path="/" element={<DefaultPage />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/agent/get-contracted/step-1" element={<Step1 />} />
+          <Route path="/agent/get-contracted/step-2" element={<Step2 />} />
+          <Route path="/agent/get-contracted/step-3" element={<Step3 />} />
+          <Route path="/agent/get-contracted/completed" element={<GetContractedCompleted />} />
+          <Route path="/agent/my-contracts" element={<MyContracts />} />
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
           <Route
             path="/admin/agent/detail/:id"
             exact
             element={<ProfileDefaultPage />}
           />        
-          {/* <Route
+          <Route path="/admin/carriers/new-carrier" element={<NewCarrier />} />
+          <Route path="/admin/leads" element={<LeadsPage />} />
+          <Route path="/admin/leads/edit" element={<LeadsOtherInfoPage />} />
+          
+          <Route
             path="/public-profile/profiles/default/"
-            element={<ProfileDefaultPage />}
+            element={<AccountProfilePage />}
+          />
+
+          {/* <Route
+            path='/public-profile/profiles/default'
+            element={<AccountProfilePage/>}
           /> */}
 
           <Route

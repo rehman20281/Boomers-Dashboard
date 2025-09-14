@@ -60,212 +60,10 @@ import {
 import { useNavigate } from 'react-router';
 import React from 'react';
 import { getAgents } from '@/utils/agentService';
+import { getprofileStatus } from '@/utils/agentService';
+
 import { formatDistanceToNow } from 'date-fns';
-
-
-// const data = [
-//   {
-//     id: '1', // Unique ID as a string
-//     invoice: 'John Doe',
-//     label: 'Active',
-//     status: 'success',
-//     date: 'Anderson',
-//     dueDate: 'ryan.mitchell@emailtest.com', // Changed to date
-//     amount: '19876543',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '2',
-//     invoice: 'Invoice-2024-rq857m',
-//     label: 'Active',
-//     status: 'success',
-//     date: '17 Jun, 2024',
-//     dueDate: '6 Aug, 2024',
-//     amount: '$29.99',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '3',
-//     invoice: 'John Doe',
-//     label: 'Active',
-//     status: 'success',
-//     date: 'Anderson',
-//     dueDate: 'ryan.mitchell@emailtest.com',
-//     amount: '19876543',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '4',
-//     invoice: 'Invoice-2024-hg234x',
-//     label: 'Inactive',
-//     status: 'destructive',
-//     date: '21 Apr, 2024',
-//     dueDate: '6 Aug, 2024',
-//     amount: '$6.59',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '5',
-//     invoice: 'Invoice-2024-lp098y',
-//     label: 'Active',
-//     status: 'success',
-//     date: '14 Mar, 2024',
-//     dueDate: '6 Aug, 2024',
-//     amount: '$79.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '6',
-//     invoice: 'Invoice-2024-q196l',
-//     label: 'Active',
-//     status: 'success',
-//     date: '08 Jan, 2024',
-//     dueDate: '6 Aug, 2024',
-//     amount: '$257.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '7',
-//     invoice: 'Invoice-2024-m113s',
-//     label: 'Upcoming',
-//     status: 'warning',
-//     date: '07 Nov, 2024',
-//     dueDate: 'Design Dept', // Changed to date
-//     amount: '$67.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '8',
-//     invoice: 'Invoice-2024-u859c',
-//     label: 'Inactive',
-//     status: 'destructive',
-//     date: '16 May, 2024',
-//     dueDate: '07 Nov, 2024',
-//     amount: '$494.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '9',
-//     invoice: 'Invoice-2024-m803g',
-//     label: 'Active',
-//     status: 'success',
-//     date: '16 Mar, 2024',
-//     dueDate: '16 Mar, 2024',
-//     amount: '$142.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '10',
-//     invoice: 'John Doe',
-//     label: 'Active',
-//     status: 'success',
-//     date: '25 Mar, 2024',
-//     dueDate: '25 Mar, 2024',
-//     amount: '$35.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '11',
-//     invoice: 'Invoice-2024-b907a',
-//     label: 'Active',
-//     status: 'success',
-//     date: '12 Feb, 2024',
-//     dueDate: '12 Feb, 2024',
-//     amount: '$59.99',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '12',
-//     invoice: 'Invoice-2024-n567k',
-//     label: 'Upcoming',
-//     status: 'warning',
-//     date: '01 Mar, 2024',
-//     dueDate: 'Marketing Dept', // Changed to date
-//     amount: '$150.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '13',
-//     invoice: 'Invoice-2024-k453j',
-//     label: 'Inactive',
-//     status: 'destructive',
-//     date: '03 Apr, 2024',
-//     dueDate: '03 Apr, 2024',
-//     amount: '$89.50',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '14',
-//     invoice: 'Invoice-2024-d981q',
-//     label: 'Active',
-//     status: 'success',
-//     date: '20 Feb, 2024',
-//     dueDate: '20 Feb, 2024',
-//     amount: '$200.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '15',
-//     invoice: 'Invoice-2024-p846y',
-//     label: 'Active',
-//     status: 'success',
-//     date: '15 May, 2024',
-//     dueDate: '15 May, 2024',
-//     amount: '$75.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '16',
-//     invoice: 'Invoice-2024-z190x',
-//     label: 'Upcoming',
-//     status: 'warning',
-//     date: '10 Jun, 2024',
-//     dueDate: 'Finance Dept', // Changed to date
-//     amount: '$130.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '17',
-//     invoice: 'Invoice-2024-l892v',
-//     label: 'Active',
-//     status: 'success',
-//     date: '25 Jan, 2024',
-//     dueDate: '25 Jan, 2024',
-//     amount: '$100.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '18',
-//     invoice: 'Invoice-2024-t675c',
-//     label: 'Inactive',
-//     status: 'destructive',
-//     date: '18 Jul, 2024',
-//     dueDate: '18 Jul, 2024',
-//     amount: '$45.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '19',
-//     invoice: 'Invoice-2024-w432r',
-//     label: 'Active',
-//     status: 'success',
-//     date: '09 Aug, 2024',
-//     dueDate: '09 Aug, 2024',
-//     amount: '$60.00',
-//     activity: '2 days ago'
-//   },
-//   {
-//     id: '20',
-//     invoice: 'Invoice-2024-e765n',
-//     label: 'Upcoming',
-//     status: 'warning',
-//     date: '12 Oct, 2024',
-//     dueDate: 'IT Dept', // Changed to date
-//     amount: '$500.00',
-//     activity: '2 days ago'
-//   },
-//   // Add the rest of the items in the same pattern...
-// ];
+import { get } from 'react-hook-form';
 
 const Invoicing = () => {
 
@@ -346,6 +144,10 @@ const Invoicing = () => {
     setMessage("");
     setErrors({});
 
+    // getprofileStatus()
+    //   .then((status) => {
+    //     console.log("Profile status data fetched successfully:", status);
+    //   });
 
     getAgents()
       .then((data) => {
@@ -363,9 +165,11 @@ const Invoicing = () => {
         }));
 
         setData(formattedData);
-        console.log("Agents data fetched successfully:", data);
+        const id = formattedData.id;
+        console.log("Agents data fetched successfully:", formattedData);
       })
       .catch((err) => console.error("Error fetching users:", err));
+
 
   };
 

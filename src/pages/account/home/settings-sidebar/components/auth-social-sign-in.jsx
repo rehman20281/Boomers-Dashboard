@@ -4,6 +4,7 @@ import { toAbsoluteUrl } from '@/lib/helpers';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
+import { Container } from '@/components/common/container';
 
 const AuthSocialSignIn = () => {
   const items = [
@@ -115,28 +116,124 @@ const AuthSocialSignIn = () => {
         <CardTitle>Social Sign in</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-5 mb-7">
-          {items.map((item, index) => {
-            return renderItem(item, index);
-          })}
-        </div>
-        <div className="flex flex-col gap-0.5 mb-5">
-          <div className="text-base font-medium text-mono">
-            More Social Sign in options
+        <Container>
+          <div className="max-w-4xl mx-auto bg-white rounded-lg p-6">
+            {/* Header */}
+            <div className="flex justify-end mb-4">
+              <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
+                + Add Leads
+              </button>
+            </div>
+
+            {/* Form Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Left Column */}
+              <div className="flex flex-col gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Coverage Type</label>
+                  <input
+                    type="text"
+                    placeholder="Coverage type"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Carrier</label>
+                  <input
+                    type="text"
+                    placeholder="Carrier"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Effective Date</label>
+                  <input
+                    type="date"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">App Submit Date</label>
+                  <input
+                    type="date"
+                    placeholder="Submit date"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Policy No</label>
+                  <input
+                    type="text"
+                    placeholder="123243535"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column */}
+              <div className="flex flex-col gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Status</label>
+                  <select className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Product</label>
+                  <input
+                    type="text"
+                    placeholder="21224342"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Renewal Date</label>
+                  <input
+                    type="text"
+                    placeholder="Daniela"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Agent/Agency</label>
+                  <input
+                    type="text"
+                    placeholder="Daniela"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Member ID</label>
+                  <input
+                    type="text"
+                    placeholder="Daniela"
+                    className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-6 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-sm text-gray-500">
+                <span className="mr-4">Create Date: 04/15/2025 10:29 AM</span>
+                <span>Last Update: 04/15/2025 10:29 AM</span>
+              </p>
+              <button className="mt-4 md:mt-0 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700">
+                Save Update
+              </button>
+            </div>
           </div>
-          <div className="text-sm text-foreground">
-            Effortless access awaits! Connect seamlessly with your preferred
-            social account.
-          </div>
-        </div>
-        <div className="flex items-center flex-wrap gap-2.5 mb-7.5">
-          {blocks.map((block, index) => {
-            return renderBlock(block, index);
-          })}
-        </div>
-        <div className="flex justify-end">
-          <Button>Save Changes</Button>
-        </div>
+        </Container>
       </CardContent>
     </Card>
   );

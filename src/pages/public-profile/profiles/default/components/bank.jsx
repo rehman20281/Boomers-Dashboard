@@ -25,19 +25,20 @@ const Bank = () => {
     getAgentById(id)
       .then((response) => {
         const agentsArray = response.data.agent;
-        setData(agentsArray || []);
+        const bankInfo = agentsArray.bankInfo || {};
+        setData(bankInfo || []);
       })
       .catch((err) => console.error("Error fetching users:", err));
 
   };
 
   const tables = [
-    { status: 'Account Holder:', info: data.firstName || 'N/A' },
-    { status: 'Bank Name:', info: data.bankName || 'N/A' },
-    { status: 'Account Number:', info: data.accountNumber || 'N/A' },
-    { status: 'Routing Number:', info: data.routingNumber || 'N/A' },
-    { status: 'Account Type:', info: data.accountType || 'N/A' },
-    { status: 'Address:', info:  data.address || 'N/A' },
+    { status: 'Account Holder:', info: data.account_holder || 'N/A' },
+    { status: 'Bank Name:', info: data.bank_name || 'N/A' },
+    { status: 'Account Number:', info: data.account_number || 'N/A' },
+    { status: 'Routing Number:', info: data.routing_number || 'N/A' },
+    { status: 'Account Type:', info: data.account_type || 'N/A' },
+    { status: 'Address:', info: data.address || 'N/A' },
   ];
 
   const renderTable = (table, index) => {

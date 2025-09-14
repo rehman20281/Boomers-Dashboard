@@ -41,7 +41,6 @@ async function request(url, options = {}) {
     console.error("HTTP Error:", error.message);
     throw error;
   }
-
 }
 
 // Reusable helpers

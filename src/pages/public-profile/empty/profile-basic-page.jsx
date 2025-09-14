@@ -27,7 +27,7 @@ export function ProfileEmptyPage() {
 
   return (
     <Fragment>
-      <UserHero
+      {/* <UserHero
         name="Jenny Klabber"
         image={image}
         info={[
@@ -35,7 +35,7 @@ export function ProfileEmptyPage() {
           { label: 'SF, Bay Area', icon: MapPin },
           { email: 'jenny@kteam.com', icon: Mail },
         ]}
-      />
+      /> */}
 
       <Container>
         <Navbar>

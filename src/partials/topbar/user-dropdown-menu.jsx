@@ -15,7 +15,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { Link } from 'react-router';
+import { data, Link } from 'react-router';
 import { toAbsoluteUrl } from '@/lib/helpers';
 import { useLanguage } from '@/providers/i18n-provider';
 import { Badge } from '@/components/ui/badge';
@@ -33,8 +33,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Switch } from '@/components/ui/switch';
+import { da } from '@faker-js/faker';
 
-export function UserDropdownMenu({ trigger }) {
+export function UserDropdownMenu({ trigger, profile, first_name, last_name, email }) {
   const { logout, user } = useAuth();
   const { currenLanguage, changeLanguage } = useLanguage();
   const { theme, setTheme } = useTheme();
@@ -46,9 +47,9 @@ export function UserDropdownMenu({ trigger }) {
       ? `${user.first_name} ${user.last_name}`
       : user?.username || 'User');
 
-  const displayEmail = user?.email || '';
+  const displayEmail = email || '';
   // const displayAvatar = user?.pic || toAbsoluteUrl('/media/avatars/300-2.png');
-  const displayAvatar = toAbsoluteUrl('/media/avatars/300-2.png');
+  const displayAvatar = profile;
 
   const handleLanguage = (lang) => {
     changeLanguage(lang);
@@ -60,6 +61,7 @@ export function UserDropdownMenu({ trigger }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear token from local storage
+    localStorage.removeItem('user-data');
     return window.location.href = '/'; // Redirect to login page
   }
 
@@ -81,7 +83,7 @@ export function UserDropdownMenu({ trigger }) {
                 to="/account/home/get-started"
                 className="text-sm text-mono hover:text-primary font-semibold"
               >
-                {displayName}
+                {first_name} {last_name}
               </Link>
               <a
                 href={`mailto:${displayEmail}`}
@@ -91,9 +93,9 @@ export function UserDropdownMenu({ trigger }) {
               </a>
             </div>
           </div>
-          <Badge variant="primary" appearance="light" size="sm">
+          {/* <Badge variant="primary" appearance="light" size="sm">
             Pro
-          </Badge>
+          </Badge> */}
         </div>
 
         <DropdownMenuSeparator />
@@ -136,7 +138,7 @@ export function UserDropdownMenu({ trigger }) {
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link
-                to="/account/home/user-profile"
+                to="/account/home/user-profile/edit"
                 className="flex items-center gap-2"
               >
                 <FileText />

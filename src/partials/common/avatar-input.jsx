@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/tooltip';
 import { ImageInput } from '@/components/image-input';
 
-export function AvatarInput() {
+export function AvatarInput({setProfile}) {
   
   const [avatar, setAvatar] = useState([
     { dataURL: toAbsoluteUrl(`/media/avatars/300-2.png`) },
@@ -19,7 +19,7 @@ export function AvatarInput() {
   return (
     <ImageInput
       value={avatar}
-      onChange={(selectedAvatar) => setAvatar(selectedAvatar)}
+      onChange={(selectedAvatar) => { setAvatar(selectedAvatar); setProfile(selectedAvatar);}}
     >
       {({ onImageUpload }) => (
         <div

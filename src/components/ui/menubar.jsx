@@ -181,7 +181,7 @@ function MenubarLabel({ className, inset, ...props }) {
       {...props}
     />
   );
-}
+} 
 
 function MenubarSeparator({ className, ...props }) {
   return (

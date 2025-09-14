@@ -74,10 +74,20 @@ export const MENU_SIDEBAR = [
       { title: 'Carriers', path: '/public-profile/projects/3-columns' },
       { title: 'Individuals', path: '/network/get-started' },
       { title: 'Agents', path: '/network/get-started' },
-      { title: 'Leads', path: '/network/get-started' },
+      { title: 'Leads', path: '/admin/leads' },
       { title: 'Events', path: '/events' },
       { title: 'More', path: '/network/get-started' },
     ],
+  },
+  {
+    title: 'Get Contracted',
+    icon: Users,
+    path: '/public-profile/empty',
+  },
+    {
+    title: 'Leads',
+    icon: Users,
+    path: '/admin/leads',
   },
   // {
   //   title: 'Boomers Insurance',
@@ -97,21 +107,6 @@ export const MENU_SIDEBAR = [
   // {
   //   title: 'Boomers Academy',
   //   icon: LayoutGrid,
-  //   children: [
-  //     { title: 'Recent Signup', path: '/recent-signups' },
-  //     { title: 'Profiles', path: '/admin/agent/detail/:id' },
-  //     { title: 'Policies', path: '/network/get-started' },
-  //     { title: 'Carriers', path: '/network/get-started' },
-  //     { title: 'Individuals', path: '/network/get-started' },
-  //     { title: 'Agents', path: '/network/get-started' },
-  //     { title: 'Leads', path: '/network/get-started' },
-  //     { title: 'Events', path: '/events' },
-  //     { title: 'More', path: '/network/get-started' },
-  //   ],
-  // },
-  // {
-  //   title: 'Network',
-  //   icon: Users,
   //   children: [
   //     { title: 'Recent Signup', path: '/recent-signups' },
   //     { title: 'Profiles', path: '/admin/agent/detail/:id' },
@@ -264,7 +259,7 @@ export const MENU_SIDEBAR = [
   //     },
   //   ],
   // },
-  // { title: 'Store - Services', icon: Codepen, disabled: true },
+  // { title: 'Store - Services', icon: Codepen, disabled: false },
   // { title: 'AI Promt', icon: Theater, disabled: true },
   // { title: 'Invoice Generator', icon: ScrollText, disabled: true },
 ];
@@ -510,7 +505,7 @@ export const MENU_SIDEBAR_COMPACT = [
         ],
       },
       { title: 'Cooperations', path: '/network/cooperations', disabled: true },
-      { title: 'Leads', path: '/network/leads', disabled: true },
+      { title: 'Leads', path: '/admin/leads', disabled: true },
       { title: 'Donators', path: '/network/donators', disabled: true },
     ],
   },
@@ -665,7 +660,7 @@ export const MENU_MEGA = [
               {
                 title: 'Leads',
                 // icon: Ghost,
-                path: '/public-profile/profiles/gamer',
+                path: '/admin/leads',
               },
               {
                 title: 'Events',

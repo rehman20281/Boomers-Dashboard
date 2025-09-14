@@ -35,7 +35,10 @@ export function SignInPage() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+  setProgress(0);
+}, []); // ✅ runs only once
   // Check for success message from password reset or error messages
   useEffect(() => {
     const pwdReset = searchParams.get('pwd_reset');
@@ -140,6 +143,8 @@ export function SignInPage() {
       }
 
       localStorage.setItem('token', data.data.token);
+      localStorage.setItem('user-data', JSON.stringify(data.data.user));
+      localStorage.setItem('user-info-prog', progress)
 
       // ✅ Navigate after login
       const nextPath = searchParams.get('next') || '/';
