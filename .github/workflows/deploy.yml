@@ -26,9 +26,9 @@ jobs:
     - name: Deploy to Boomers Insurance
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: ${{ secrets.FTP_PORT }}
+        server: ftp.boomersinsuranceservices.com
+        username: frontend-deployment@boomersinsuranceservices.com
+        password: b2bb|D212)1$
+        port: 21
         local-dir: ./dist/
-        server-dir: ${{ secrets.FTP_DIR }}
+        server-dir: /portal.boomersinsuranceservices.com/public_html/
