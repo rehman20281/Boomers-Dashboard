@@ -3,10 +3,15 @@ name: Deploy to Server
 on:
   push:
     branches: [ main ]
+  pull_request:
+    types: [ closed ]
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     
     steps:
     - uses: actions/checkout@v4
@@ -26,9 +31,9 @@ jobs:
     - name: Deploy to Boomers Insurance
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp.boomersinsuranceservices.com
-        username: frontend-deployment@boomersinsuranceservices.com
-        password: b2bb|D212)1$
-        port: 21
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: ${{ secrets.FTP_PORT }}
         local-dir: ./dist/
-        server-dir: /portal.boomersinsuranceservices.com/public_html/
+        server-dir: ${{ secrets.FTP_DIR }}
