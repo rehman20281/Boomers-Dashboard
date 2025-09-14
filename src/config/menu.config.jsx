@@ -625,7 +625,7 @@ export const MENU_MEGA = [
             children: [
               {
                 title: 'Accounts',
-                // icon: Badge,
+                // icon: Badge, 
                 path: '/recent-signups',
               },
               {
