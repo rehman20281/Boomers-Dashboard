@@ -37,3 +37,14 @@ jobs:
         port: ${{ secrets.FTP_PORT }}
         local-dir: ./dist/
         server-dir: ${{ secrets.FTP_DIR }}
+        dangerous-clean-slate: true
+        
+    - name: Clear server cache
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        script: |
+          rm -rf ${{ secrets.FTP_DIR }}cache/
+          rm -rf ${{ secrets.FTP_DIR }}tmp/
