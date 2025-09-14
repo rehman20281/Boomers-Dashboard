@@ -1,12 +1,14 @@
 name: Deploy to Server
 
 on:
-  push:
+  pull_request:
+    types: [ closed ]
     branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     
     steps:
     - uses: actions/checkout@v4
@@ -22,6 +24,14 @@ jobs:
     
     - name: Build
       run: npm run build
+      
+    - name: Add cache busting
+      run: |
+        cd dist
+        find . -name "*.js" -o -name "*.css" | while read file; do
+          timestamp=$(date +%s)
+          mv "$file" "${file%.*}-${timestamp}.${file##*.}"
+        done
     
     - name: Deploy to Boomers Insurance
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -32,3 +42,13 @@ jobs:
         port: 21
         local-dir: ./dist/
         server-dir: /portal.boomersinsuranceservices.com/public_html/
+        
+    - name: Clear server cache
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ftp.boomersinsuranceservices.com
+        username: frontend-deployment@boomersinsuranceservices.com
+        password: b2bb|D212)1$
+        script: |
+          rm -rf /portal.boomersinsuranceservices.com/public_html/cache/
+          rm -rf /portal.boomersinsuranceservices.com/public_html/tmp/
