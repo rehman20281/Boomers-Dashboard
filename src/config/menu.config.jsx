@@ -68,7 +68,7 @@ export const MENU_SIDEBAR = [
     title: 'Dashboards',
     icon: LayoutGrid,
     children: [
-      { title: 'Recent Signup', path: '/recent-signups' },
+      { title: 'Accounts', path: '/recent-signups' },
       // { title: 'Profiles', path: '/admin/agent/detail/:id' },
       { title: 'Policies', path: '/network/get-started' },
       { title: 'Carriers', path: '/public-profile/projects/3-columns' },
