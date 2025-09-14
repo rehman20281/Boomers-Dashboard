@@ -1,6 +1,6 @@
 export * from './about';
-export * from './Licensing';
-export * from './Bank';
+export * from './licensing';
+export * from './bank';
 export * from './community-badges';
 export * from './connections';
 export * from './contributions';
@@ -12,5 +12,5 @@ export * from './sales-overview';
 export * from './tags';
 export * from './unlock-partnerships';
 export * from './work-experience';
-export * from './invoicing'
+export * from './Invoicing'
 export * from './policies'
